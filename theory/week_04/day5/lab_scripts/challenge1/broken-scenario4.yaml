@@ -1,5 +1,5 @@
-# Week 4 Day 5 Challenge 1: 시나리오 4 - 리소스 제한 누락으로 인한 노드 과부하
-# 의도적 오류: requests만 설정하고 limits 누락
+# Week 4 Day 5 Challenge 1: 시나리오 4 - 리소스 제한 설정 완료
+# 수정: 모든 컨테이너에 requests와 limits 설정
 
 ---
 apiVersion: apps/v1
@@ -32,6 +32,9 @@ spec:
             cpu: 200m
             memory: 256Mi
           # 의도적 오류: limits 누락
+          limits:
+            cpu: 400m
+            memory: 512Mi
 
 ---
 apiVersion: apps/v1
@@ -64,6 +67,9 @@ spec:
             cpu: 150m
             memory: 192Mi
           # 의도적 오류: limits 누락
+          limits:
+            cpu: 300m
+            memory: 384Mi
 
 ---
 apiVersion: apps/v1
@@ -96,6 +102,9 @@ spec:
             cpu: 300m
             memory: 384Mi
           # 의도적 오류: limits 누락
+          limits:
+            cpu: 600m
+            memory: 768Mi
 
 ---
 apiVersion: apps/v1
@@ -128,10 +137,12 @@ spec:
             cpu: 250m
             memory: 320Mi
           # 의도적 오류: limits 누락
-          # limits:
+          limits:
+            cpu: 500m
+            memory: 640Mi
 
 ---
-# Staging 환경 - 일부 서비스도 limits 누락
+# Staging 환경 - 리소스 제한 완전 설정
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -162,4 +173,6 @@ spec:
             cpu: 100m
             memory: 128Mi
           # 의도적 오류: limits 누락
-          # limits:
+            limits:
+              cpu: 200m
+              memory: 256Mi
